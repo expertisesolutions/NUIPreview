@@ -1,0 +1,20 @@
+version: 2.1.0.{build}
+
+image: Visual Studio 2017 
+
+install:
+- cmd: git submodule -q update --init
+
+before_build:
+- cmd: nuget restore
+
+build:
+  project: OmniXaml.sln
+  verbosity: minimal
+
+test_script:
+- cmd: dotnet test OmniXaml.Tests\OmniXaml.Tests.csproj
+  
+nuget:
+  account_feed: true
+  project_feed: true

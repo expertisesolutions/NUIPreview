@@ -1,0 +1,36 @@
+<Project>
+
+  <PropertyGroup>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <GenerateDependencyFile>False</GenerateDependencyFile>
+    <Deterministic>True</Deterministic>
+    <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <ProjectRootDir>$(MSBuildThisFileDirectory)..\</ProjectRootDir>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AllTizenProfiles>mobile;tv;wearable</AllTizenProfiles>
+    <SupportedProfiles Condition="'$(SupportedProfiles)' == ''">$(AllTizenProfiles)</SupportedProfiles>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DefineConstants Condition="'$(BuildProfile)' == 'tv'">$(DefineConstants);PROFILE_TV</DefineConstants>
+    <DefineConstants Condition="'$(BuildProfile)' == 'wearable'">$(DefineConstants);PROFILE_WEARABLE</DefineConstants>
+    <DefineConstants Condition="'$(BuildProfile)' == 'mobile'">$(DefineConstants);PROFILE_MOBILE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)Open.snk</AssemblyOriginatorKeyFile>
+    <PublicSign Condition="'$(OS)' != 'Windows_NT'">true</PublicSign>
+  </PropertyGroup>
+
+  <Import Project="$(MSBuildThisFileDirectory)version.props" />
+  <Import Project="$(MSBuildThisFileDirectory)analyzers.props"
+          Condition="'$(BuildWithAnalyzer)' == 'True' Or '$(BuildingInsideVisualStudio)' == 'True'" />
+
+</Project>
