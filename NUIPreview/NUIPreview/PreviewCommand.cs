@@ -32,7 +32,6 @@ namespace NUIPreview
         /// </summary>
         private readonly AsyncPackage package;
 
-        private MessagePort previewPort = new MessagePort(PreviewWindow.PortName, true);
         private Thread previewTask = null;
 
         /// <summary>
@@ -100,9 +99,6 @@ namespace NUIPreview
 
         private void Preview()
         {
-            var textView = Global.GetTextView();
-            var language = textView.TextBuffer.ContentType.TypeName;
-
             if (previewTask != null && !previewTask.IsAlive)
             {
                 previewTask.Join();
@@ -113,28 +109,6 @@ namespace NUIPreview
             {
                 previewTask = new Thread(this.PreviewTask);
                 previewTask.Start();
-            }
-
-            if (language != null && language == "Xaml")
-            {
-                var snapshot = textView.TextSnapshot;
-
-                if (snapshot != snapshot.TextBuffer.CurrentSnapshot)
-                {
-                    return;
-                }
-
-                if (!textView.Selection.IsEmpty)
-                {
-                    return;
-                }
-
-                var code = snapshot.GetText();
-
-                Bundle args = new Bundle();
-                args.AddItem("message", "preview");
-                args.AddItem("content", code);
-                previewPort.Send(args, PreviewWindow.AppId, PreviewWindow.PortName);
             }
         }
 

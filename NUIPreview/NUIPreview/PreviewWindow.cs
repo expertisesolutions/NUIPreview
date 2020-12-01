@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.Text.Editor;
 using System.Diagnostics;
 using Tizen.NUI;
 using Tizen.NUI.BaseComponents;
@@ -14,53 +15,82 @@ namespace NUIPreview
 {
     class PreviewWindow : NUIApplication
     {
-        public static readonly string PortName = "NUI Preview";
-        public static readonly string AppId = "FakeApp";
-        private MessagePort messages = new MessagePort(PortName, true);
-        private static PreviewWindow Instance = null;
-
         private View currentView = null;
-        private Loader loader = new Loader(new List<Assembly> { Assembly.GetEntryAssembly() });
+        private Timer refresher = new Timer(600);
+        private Loader loader;
+        private string previousCode = "";
 
         public PreviewWindow()
         {
-            Instance = this;
+            var assem = Assembly.GetEntryAssembly();
+            var assemList = new List<Assembly>();
+            if (assem != null)
+            {
+                assemList.Add(assem);
+            }
+            loader = new Loader(assemList);
         }
 
         protected override void OnCreate()
         {
             base.OnCreate();
-            messages.Listen();
-            messages.MessageReceived += MessageCallback;
 
             Window.Instance.KeyEvent += (sender, e) =>
             {
                 if (e.Key.KeyPressedName == "Escape")
                 {
-                    CloseMe();
+                    Exit();
                 }
             };
 
+            refresher.Tick += (sender, args) =>
+            {
+                IWpfTextView textView;
+
+                try
+                {
+                    textView = Global.GetTextView();
+                }
+                catch (Exception e)
+                {
+                    return true;
+                }
+
+                var language = textView.TextBuffer.ContentType.TypeName;
+
+                if (language != null && language == "XML")
+                {
+                    var snapshot = textView.TextSnapshot;
+
+                    if (snapshot != snapshot.TextBuffer.CurrentSnapshot)
+                    {
+                        return true;
+                    }
+
+                    if (!textView.Selection.IsEmpty)
+                    {
+                        return true;
+                    }
+
+                    var code = snapshot.GetText();
+
+                    if (code != previousCode)
+                    {
+                        ShowPreview(code);
+                        previousCode = code;
+                    }
+                }
+                return true;
+            };
+
+            refresher.Start();
             Window.Instance.BackgroundColor = Color.White;
         }
 
-        private static void MessageCallback(object sender, MessageReceivedEventArgs args)
+        protected override void OnTerminate()
         {
-            switch (args.Message.GetItem<string>("message"))
-            {
-                case "close":
-                    Instance.CloseMe();
-                    break;
-                case "preview":
-                    Instance.ShowPreview(args.Message.GetItem<string>("content"));
-                    break;
-            }
-        }
-
-        private void CloseMe()
-        {
-            Instance = null;
-            Exit();
+            refresher.Stop();
+            base.OnTerminate();
         }
 
         private void ShowPreview(string xaml)
@@ -81,8 +111,9 @@ namespace NUIPreview
                 Window.Instance.GetDefaultLayer().Remove(currentView);
             }
 
-            Window.Instance.WindowSize = view.Size;
+            //Window.Instance.WindowSize = view.Size;
             Window.Instance.GetDefaultLayer().Add(view);
+            Window.Instance.Show();
             currentView = view;
         }
     }

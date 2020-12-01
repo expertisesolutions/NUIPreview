@@ -30,7 +30,7 @@ namespace Nui.Vsix.Xaml
 
             var nss = from route in routes
                       group route by route.Ns
-                into g
+                      into g
                       let ns = g.Select(arg => arg.configuredAssemblyWithNamespaces).ToArray()
                       select XamlNamespace.Map(g.Key).With(ns);
 
