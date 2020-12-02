@@ -5,6 +5,7 @@ using System.ComponentModel.Design;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using System.IO;
 using Task = System.Threading.Tasks.Task;
 using System.Threading;
 using Tizen.Applications.Messages;
@@ -48,6 +49,8 @@ namespace NUIPreview
             var menuCommandID = new CommandID(CommandSet, CommandId);
             var menuItem = new MenuCommand(this.Execute, menuCommandID);
             commandService.AddCommand(menuItem);
+
+            SetFontsPath();
         }
 
         /// <summary>
@@ -110,6 +113,13 @@ namespace NUIPreview
                 previewTask = new Thread(this.PreviewTask);
                 previewTask.Start();
             }
+        }
+
+        private void SetFontsPath()
+        {
+            var vsixPath = Path.GetDirectoryName(Global.GetAssemblyLocalPathFrom(typeof(NUIPreviewPackage)));
+            var fontsPath = Path.Combine(vsixPath, "fonts.conf");
+            Environment.SetEnvironmentVariable("FONTCONFIG_FILE", fontsPath);
         }
 
         private void PreviewTask()
