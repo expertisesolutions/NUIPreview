@@ -149,7 +149,16 @@
         <Asset d:Source="File" Path="../deps/webpdecoder.dll" Type="DLL" />
         <Asset d:Source="File" Path="../deps/webpdemux.dll" Type="DLL" />
         <Asset d:Source="File" Path="../deps/webp.dll" Type="DLL" />
+        <Asset d:Source="File" Path="../deps/webpd.dll" Type="DLL" />
+        <Asset d:Source="File" Path="../deps/cairod.dll" Type="DLL" />
+        <Asset d:Source="File" Path="../deps/freetyped.dll" Type="DLL" />
+        <Asset d:Source="File" Path="../deps/libcurl-d.dll" Type="DLL" />
+        <Asset d:Source="File" Path="../deps/libpng16d.dll" Type="DLL" />
+        <Asset d:Source="File" Path="../deps/pthreadVC3d.dll" Type="DLL" />
+        <Asset d:Source="File" Path="../deps/webpdemuxd.dll" Type="DLL" />
         <Asset d:Source="File" Path="../deps/zlib1.dll" Type="DLL" />
+        <Asset d:Source="File" Path="../deps/zlibd1.dll" Type="DLL" />
+        <Asset d:Source="File" Path="../deps/bz2d.dll" Type="DLL" />
         <Asset d:Source="File" Path="../fontconfig/fonts.conf" Type="DLL" />
         <Asset d:Source="File" Path="../fontconfig/conf.d/10-autohint.conf" Type="DLL" />
         <Asset d:Source="File" Path="../fontconfig/conf.d/10-hinting-full.conf" Type="DLL" />
