@@ -103,7 +103,7 @@ namespace NUIPreview
             {
                 view = (View) loader.Load(xaml);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.WriteLine(e);
                 return;

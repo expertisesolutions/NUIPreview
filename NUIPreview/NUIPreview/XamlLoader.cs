@@ -18,11 +18,7 @@ namespace Nui.Vsix.Xaml
                 new DirectCompatibilitySourceValueConverter(),
                 new AttributeBasedStringValueConverter(Assemblies),
                 new ComponentModelTypeConverterBasedSourceValueConverter(),
-                new Converter(new BindablePropertyConverter()),
-                new Converter(new ColorTypeConverter()),
-                new Converter(new BindingTypeConverter()),
-                new Converter(new Size2DTypeConverter()),
-                new Converter(new SizeTypeConverter()),
+                new Converter(),
             });
 
         protected override IXmlTypeResolver XmlTypeResolver => new XmlTypeXmlTypeResolver(new TypeLocator(Assemblies));
