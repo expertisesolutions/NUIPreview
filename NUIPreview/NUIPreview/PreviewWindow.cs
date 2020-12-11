@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.Text.Editor;
@@ -16,18 +17,20 @@ namespace NUIPreview
     class PreviewWindow : NUIApplication
     {
         private View currentView = null;
-        private Timer refresher = new Timer(600);
+        private Timer refresher = new Timer(300);
         private Loader loader;
         private string previousCode = "";
 
         public PreviewWindow()
         {
-            var assem = Assembly.GetEntryAssembly();
+            var assem = Assembly.GetExecutingAssembly();
             var assemList = new List<Assembly>();
             if (assem != null)
             {
                 assemList.Add(assem);
             }
+            var assemblies = from m in assem.GetModules(false) select m.Assembly;
+            assemList.Concat<Assembly>(assemblies);
             loader = new Loader(assemList);
         }
 
