@@ -49,8 +49,7 @@ namespace NUIPreview
             var menuCommandID = new CommandID(CommandSet, CommandId);
             var menuItem = new MenuCommand(this.Execute, menuCommandID);
             commandService.AddCommand(menuItem);
-
-            SetFontsPath();
+            SetupEnvironment();
         }
 
         /// <summary>
@@ -115,11 +114,15 @@ namespace NUIPreview
             }
         }
 
-        private void SetFontsPath()
+        private string GetPackagePath() => Path.GetDirectoryName(Global.GetAssemblyLocalPathFrom(typeof(NUIPreviewPackage)));
+
+        private void SetupEnvironment()
         {
-            var vsixPath = Path.GetDirectoryName(Global.GetAssemblyLocalPathFrom(typeof(NUIPreviewPackage)));
+            var vsixPath = GetPackagePath();
+
             var fontsPath = Path.Combine(vsixPath, "fonts.conf");
             Environment.SetEnvironmentVariable("FONTCONFIG_FILE", fontsPath);
+            Environment.SetEnvironmentVariable("DALI_APPLICATION_PACKAGE", GetPackagePath());
         }
 
         private void PreviewTask()
