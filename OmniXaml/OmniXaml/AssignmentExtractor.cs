@@ -145,7 +145,7 @@
 
         private static bool IsAssignment(XAttribute attribute)
         {
-            return !(attribute.IsNamespaceDeclaration || attribute.Name.Namespace == SpecialNamespace);
+            return !(attribute.IsNamespaceDeclaration || attribute.Name.Namespace == SpecialNamespace) && attribute.Name.LocalName != "Class";
         }
 
         private MemberAssignment ToAssignment(Type type, XAttribute attribute)
