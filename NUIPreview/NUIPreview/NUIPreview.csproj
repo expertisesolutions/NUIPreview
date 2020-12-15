@@ -98,6 +98,78 @@
       <IncludeInVSIX>true</IncludeInVSIX>
       <Link>conf.d/%(Filename)%(Extension)</Link>
     </Content>
+    <Content Include="../toolkit/images/*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Visible>false</Visible>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <Link>toolkit/images/%(Filename)%(Extension)</Link>
+    </Content>
+    <Content Include="../toolkit/sounds/*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Visible>false</Visible>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <Link>toolkit/sounds/%(Filename)%(Extension)</Link>
+    </Content>
+    <Content Include="../toolkit/styles/*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Visible>false</Visible>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <Link>toolkit/styles/%(Filename)%(Extension)</Link>
+    </Content>
+    <Content Include="../toolkit/styles/images/*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Visible>false</Visible>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <Link>toolkit/styles/images/%(Filename)%(Extension)</Link>
+    </Content>
+    <Content Include="../com.samsung.dali-demo/res/style/images/*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Visible>false</Visible>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <Link>com.samsung.dali-demo/res/style/images/%(Filename)%(Extension)</Link>
+    </Content>
+    <Content Include="../com.samsung.dali-demo/res/images/*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Visible>false</Visible>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <Link>com.samsung.dali-demo/res/images/%(Filename)%(Extension)</Link>
+    </Content>
+    <Content Include="../com.samsung.dali-demo/res/game/*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Visible>false</Visible>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <Link>com.samsung.dali-demo/res/game/%(Filename)%(Extension)</Link>
+    </Content>
+    <Content Include="../com.samsung.dali-demo/res/models/*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Visible>false</Visible>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <Link>com.samsung.dali-demo/res/models/%(Filename)%(Extension)</Link>
+    </Content>
+    <Content Include="../com.samsung.dali-demo/res/scripts/*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Visible>false</Visible>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <Link>com.samsung.dali-demo/res/scripts/%(Filename)%(Extension)</Link>
+    </Content>
+    <Content Include="../com.samsung.dali-demo/res/shaders/*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Visible>false</Visible>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <Link>com.samsung.dali-demo/res/shaders/%(Filename)%(Extension)</Link>
+    </Content>
+    <Content Include="../com.samsung.dali-demo/res/style/*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Visible>false</Visible>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <Link>com.samsung.dali-demo/res/style/%(Filename)%(Extension)</Link>
+    </Content>
+    <Content Include="../com.samsung.dali-demo/res/videos/*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Visible>false</Visible>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <Link>com.samsung.dali-demo/res/videos/%(Filename)%(Extension)</Link>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\OmniXaml\OmniXaml\OmniXaml.csproj" />

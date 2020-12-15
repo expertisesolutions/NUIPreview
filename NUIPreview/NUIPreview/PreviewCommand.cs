@@ -119,10 +119,17 @@ namespace NUIPreview
         private void SetupEnvironment()
         {
             var vsixPath = GetPackagePath();
+            var toolkit = Path.Combine(vsixPath, "toolkit");
+            var res = Path.Combine(vsixPath, "com.samsung.dali-demo", "res/");
 
-            var fontsPath = Path.Combine(vsixPath, "fonts.conf");
-            Environment.SetEnvironmentVariable("FONTCONFIG_FILE", fontsPath);
-            Environment.SetEnvironmentVariable("DALI_APPLICATION_PACKAGE", GetPackagePath());
+            Environment.SetEnvironmentVariable("FONTCONFIG_FILE", Path.Combine(vsixPath, "fonts.conf"));
+            Environment.SetEnvironmentVariable("DALI_APPLICATION_PACKAGE", res);
+            Environment.SetEnvironmentVariable("DALI_IMAGE_DIR", Path.Combine(toolkit, "images/"));
+            Environment.SetEnvironmentVariable("DALI_SOUND_DIR", Path.Combine(toolkit, "sounds/"));
+            Environment.SetEnvironmentVariable("DALI_STYLE_DIR", Path.Combine(toolkit, "styles/"));
+            Environment.SetEnvironmentVariable("DALI_STYLE_IMAGE_DIR", Path.Combine(toolkit, "styles", "images/"));
+            Environment.SetEnvironmentVariable("DALI_WINDOW_HEIGHT", "800");
+            Environment.SetEnvironmentVariable("DALI_WINDOW_WIDTH", "480");
         }
 
         private void PreviewTask()
