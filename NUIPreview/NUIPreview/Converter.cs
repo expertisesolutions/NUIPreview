@@ -18,6 +18,8 @@ namespace Nui.Vsix.Xaml
             converters.Add(typeof(Color), new ColorTypeConverter());
             converters.Add(typeof(Size2D), new Size2DTypeConverter());
             converters.Add(typeof(Size), new SizeTypeConverter());
+            converters.Add(typeof(Position), new PositionTypeConverter());
+            converters.Add(typeof(Position2D), new Position2DTypeConverter());
         }
 
         public (bool, object) Convert(string value, Type desiredTargetType, ConvertContext context = null)

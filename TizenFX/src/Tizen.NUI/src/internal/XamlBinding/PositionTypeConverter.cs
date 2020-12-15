@@ -7,7 +7,7 @@ using Tizen.NUI;
 
 namespace Tizen.NUI.Binding
 {
-    internal class PositionTypeConverter : TypeConverter
+    public class PositionTypeConverter : TypeConverter
     {
         public override object ConvertFromInvariantString(string value)
         {
@@ -77,7 +77,7 @@ namespace Tizen.NUI.Binding
         }
     }
 
-    internal class Position2DTypeConverter : TypeConverter
+    public class Position2DTypeConverter : TypeConverter
     {
         public override object ConvertFromInvariantString(string value)
         {
