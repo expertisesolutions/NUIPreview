@@ -122,6 +122,7 @@ namespace NUIPreview
             var toolkit = Path.Combine(vsixPath, "toolkit");
             var res = Path.Combine(vsixPath, "com.samsung.dali-demo", "res/");
 
+            Environment.SetEnvironmentVariable("DALI_DATA_READ_ONLY_DIR", vsixPath);
             Environment.SetEnvironmentVariable("FONTCONFIG_FILE", Path.Combine(vsixPath, "fonts.conf"));
             Environment.SetEnvironmentVariable("DALI_APPLICATION_PACKAGE", res);
             Environment.SetEnvironmentVariable("DALI_IMAGE_DIR", Path.Combine(toolkit, "images/"));
