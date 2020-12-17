@@ -61,7 +61,7 @@ namespace NUIPreview
 
                 var language = textView.TextBuffer.ContentType.TypeName;
 
-                if (language != null && language == "XML")
+                if (Loader.SupportedLanguages.Contains(language))
                 {
                     var snapshot = textView.TextSnapshot;
 

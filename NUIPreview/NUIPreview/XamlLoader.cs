@@ -21,6 +21,9 @@ namespace Nui.Vsix.Xaml
                 new Converter(),
             });
 
+
+        public static List<string> SupportedLanguages { get; } = new List<string>{ "XAML", "XML" };
+
         protected override IXmlTypeResolver XmlTypeResolver => new XmlTypeXmlTypeResolver(new TypeLocator(Assemblies));
     }
 }
