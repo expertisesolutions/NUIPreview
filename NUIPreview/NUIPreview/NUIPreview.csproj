@@ -80,7 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\PreviewCommand.png" />
-    <Content Include="../deps/*.dll">
+    <Content Include="../deps/*">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Visible>false</Visible>
       <IncludeInVSIX>true</IncludeInVSIX>
