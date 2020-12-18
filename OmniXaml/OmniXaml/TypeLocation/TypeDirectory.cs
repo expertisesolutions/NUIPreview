@@ -6,7 +6,7 @@
 
     public class TypeDirectory : ITypeDirectory
     {
-        private const string ClrNamespace = "using:";
+        private static readonly List<string> namespaceDeclarations = new List<string> { "using:", "clr-namespace:" };
         private readonly ISet<XamlNamespace> xamlNamespaces;
 
         public TypeDirectory(IEnumerable<XamlNamespace> xamlNamespaces)
@@ -37,13 +37,13 @@
             {
                 return TypeLocation.ClrNamespace.ExtractNamespace(name);
             }
-
+                
             return xamlNamespaces.FirstOrDefault(xamlNamespace => xamlNamespace.Name == name);
         }
 
         private static bool IsClrNamespace(string ns)
         {
-            return ns.StartsWith(ClrNamespace);
+            return namespaceDeclarations.Exists(decl => ns.StartsWith(decl));
         }
     }
 }
