@@ -33,8 +33,16 @@ namespace NUIPreview
         /// </summary>
         private readonly AsyncPackage package;
 
+        /// <summary>
+        /// Thread that process preview window
+        /// </summary>
         private Thread previewTask = null;
 
+        /// <summary>
+        /// Window to preview the XAML
+        /// </summary>
+        private PreviewWindow previewWindow;
+ 
         /// <summary>
         /// Initializes a new instance of the <see cref="PreviewCommand"/> class.
         /// Adds our command handlers for menu (commands must exist in the command table file)
@@ -101,13 +109,14 @@ namespace NUIPreview
 
         private void Preview()
         {
-            if (previewTask != null && !previewTask.IsAlive)
+            if (previewTask != null && previewTask.IsAlive)
             {
-                previewTask.Join();
-                previewTask = null;
-            }
-
-            if (previewTask == null)
+                if (previewWindow != null)
+                {
+                    previewWindow.Exit();
+                    previewWindow.Dispose();
+                }
+            } else
             {
                 previewTask = new Thread(this.PreviewTask);
                 previewTask.Start();
@@ -135,7 +144,7 @@ namespace NUIPreview
 
         private void PreviewTask()
         {
-            var previewWindow = new PreviewWindow();
+            previewWindow = new PreviewWindow();
             string[] args = { "Visual Studio" };
             previewWindow.Run(args);
         }
